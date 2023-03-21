@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" entityID="https://sso.saml.to/github/saml2/MetaSearch-IO">
+  <md:IDPSSODescriptor WantAuthnRequestsSigned="false"
+    protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIEBzCCAu8CBgGDsk0VljANBgkqhkiG9w0BAQsFADAUMRIwEAYDVQQDDAlsb2NhbGhvc3QwHhcNMjIxMDA3MTE1NTQxWhcNMzIxMDA0MTE1NTQxWjB6MQswCQYDVQQGEwJVUzEQMA4GA1UECAwHSW5kaWFuYTEPMA0GA1UEBwwGR29zaGVuMRAwDgYDVQQKDAdTQU1MLnRvMRYwFAYDVQQLDA1NZXRhU2VhcmNoLUlPMR4wHAYDVQQDDBVzYW1sLnRvIE1ldGFTZWFyY2gtSU8wggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQCqoPX5zS+stZ5z4hX+nT4iPSxZVobyQsAI3zQ/ZXY4fYTz2+wAL555ciMdgGmqszg/II7MYOBA7+ghVLl4lDNzgzORBx/0Vw3gfyLPRZKB78Du75mPDZW5w3Tl2eGXFiWSZW/VznUBWstkgncopezfGyTdc7hoym7U1XN33rpEW0I9imtqVxYRDd50lCTw1naba38XRdWYQbw8zMxaRWvS55tvg3TSKADej2PzJcihS5Wb81N+85w5uT4Nh4XKw3vL4Wuhptg+EQgsK7OX3Yvjg7bGVEE5th4BP2ViHyhulZms+8n5YStEM8KeVEE46MlFUVtuYK+1I34znbZMComkMV+TA0Werwx5ktXfDikxu0Ciiuf1NggzkF2e3XaEOJ68g261Csw6LIW1FoEnYjBn7gygGYd939PpFCMon7xQecUhROVZiiWo2XzrHLeQtJ7WE39qHdosMfP6nKb9ZdNG7hjIcH4c0HzYIgY1lmPO01a+uKiQEzKwgX3HwacaI4tB9A/cxh73Bgf/4bi1qnwo7GexH7619LLCT32/2Bm+IIW/4EfKLv26i4bvRsD7ls6TaCGlcE70mFkbfvKV3TTBB7dKSpYQj/6XIf+Qs8nim6w5fzRIXykkz27+6ewja4ua7OYEExQXyQRF6RrE+0j+ow+/vAkaZWU3LeyOboNZzQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQA3fHg/KAeKjRP8HphkHRdfTytSilZOka7OmC61FIcwprstI3VHpM0uWf+4LOVDxzAHjuwPqMmY3QCohbClxzsgVUQrD9+9/RyY1lYVFdtkK/yStPN0kYmCreEplxmotjxZMXpTEgG5iuUs/GrWb13iaHY9eB1l/DbNe0sJJ3dINv6wOuNxo7YUn2H0VE5JArrJLtasBjU9Yu4bfiNVWhH1WJiRdEEwOqyE9SYeSvijtEf9WIo0QaV6cfD+h01Mp80G88trCN/6nxaveaZKoIG4mQBm2voK7HgO/aQMcnEfjb7b+BE8Dm0a6GjEf9PH0El+P3AqQqtoeV3EuPlZvK1V</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://sso.saml.to/github/saml2/MetaSearch-IO/login" />
+    <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://sso.saml.to/github/saml2/MetaSearch-IO/login" />
+  </md:IDPSSODescriptor>
+</md:EntityDescriptor>
