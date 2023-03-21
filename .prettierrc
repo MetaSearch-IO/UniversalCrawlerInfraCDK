@@ -1,0 +1,9 @@
+{
+  "pluginSearchDirs": ["./node_modules"],
+  "plugins": ["prettier-plugin-multiline-arrays"],
+  "multilineArraysWrapThreshold": 3,
+  "semi": true,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "printWidth": 120
+}

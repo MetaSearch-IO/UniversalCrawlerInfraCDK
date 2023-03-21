@@ -1,0 +1,14 @@
+*.js
+!jest.config.js
+!.eslintrc.js
+*.d.ts
+node_modules
+dist/
+*.zip
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# IDE stuff
+.idea/
