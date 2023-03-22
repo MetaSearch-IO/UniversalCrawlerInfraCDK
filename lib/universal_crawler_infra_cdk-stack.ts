@@ -21,6 +21,7 @@ export class UniversalCrawlerInfraPipeline extends cdk.Stack {
 
     const pipeline = new KaitoPipeline(this, 'UniversalCrawlerInfraPipeline', {
       pipelineName: 'UniversalCrawlerInfraPipeline',
+      account: pipelineDeploymentAccount,
       crossAccountKeys: true,
     });
 

@@ -1,4 +1,9 @@
-import { KaitoStack, KaitoStackProps, SlackChannelConfigurationConstruct } from '@meta-search/kaito-cdk-construct';
+import {
+  KaitoStack,
+  KaitoStackProps,
+  PipelineDeploymentAccounts,
+  SlackChannelConfigurationConstruct,
+} from '@meta-search/kaito-cdk-construct';
 import { Construct } from 'constructs';
 
 export interface SlackChannelConfigurationStackProps extends KaitoStackProps {}
@@ -8,7 +13,9 @@ export class SlackChannelConfigurationStack extends KaitoStack {
     super(scope, id, props);
 
     if (props.env.stage === 'dev') {
-      const slackChannelConfigurationConstruct = new SlackChannelConfigurationConstruct(this, id);
+      const slackChannelConfigurationConstruct = new SlackChannelConfigurationConstruct(this, id, {
+        account: props.env.account as PipelineDeploymentAccounts,
+      });
     }
   }
 }

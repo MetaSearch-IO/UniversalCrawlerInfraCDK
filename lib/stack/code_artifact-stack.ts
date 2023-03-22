@@ -21,8 +21,12 @@ export class CodeArtifactStack extends KaitoStack {
       // Downloaded from: https://saml.to/metadata
       const metadataPath = path.join(__dirname, '..', '..', 'saml.to-MetaSearch-IO-metadata.xml');
 
-      const codeArtifactConstruct = new CodeArtifactConstruct(this, id, iam.SamlMetadataDocument.fromFile(metadataPath));
-      
+      const codeArtifactConstruct = new CodeArtifactConstruct(
+        this,
+        id,
+        iam.SamlMetadataDocument.fromFile(metadataPath),
+      );
+
       this.samlProviderRole = codeArtifactConstruct.samlProviderRole;
       this.codeArtifactDomain = codeArtifactConstruct.codeArtifactDomain;
     }

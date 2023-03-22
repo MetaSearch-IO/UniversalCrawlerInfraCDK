@@ -6,8 +6,8 @@ export class GithubOIDCRolesAndBucketStack extends KaitoStack {
     super(scope, id, props);
 
     const githubOIDCRolesAndBucketConstruct = new GithubOIDCRolesAndBucketConstruct(this, id, {
-        env: props.env,
-        stackPrefix: props.stackPrefix
+      env: props.env,
+      stackPrefix: props.stackPrefix,
     });
   }
 }
