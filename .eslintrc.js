@@ -12,12 +12,12 @@ module.exports = {
     'plugin:import/typescript',
   ],
   parser: '@typescript-eslint/parser',
-  ignorePatterns: ["test/", "node_modules/", "dist/"],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint', 'prettier'],
+  ignorePatterns: ["test/", "node_modules/"],
   rules: {
     'import/prefer-default-export': 0,
     'import/order': [
