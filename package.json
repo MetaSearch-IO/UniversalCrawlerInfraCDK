@@ -37,7 +37,7 @@
     "typescript": "~4.7.3"
   },
   "dependencies": {
-    "@meta-search/kaito-cdk-construct": "^0.0.153",
+    "@meta-search/kaito-cdk-construct": "^0.0.155",
     "aws-cdk-lib": "2.66.0",
     "cdk-codeartifact": "^1.0.1",
     "constructs": "^10.0.0",
