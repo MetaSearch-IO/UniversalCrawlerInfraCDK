@@ -24,10 +24,14 @@ export const stageToDeploymentGroup = (scope: Construct): Record<string, Deploym
       const disambiguator = env.disambiguator ?? env.stage;
       const stackPrefix = `${disambiguator}-${env.region.replace(/-/g, '')}`;
 
-      const importedResourceStack = new ImportedResourceStack(scope, `${stackPrefix}-ImportedResourceStack`, {
-        env,
-        stackPrefix,
-      });
+      const importedResourceStack = new ImportedResourceStack(
+        scope,
+        `${stackPrefix}-UniversalCrawlerInfra-ImportedResourceStack`,
+        {
+          env,
+          stackPrefix,
+        },
+      );
 
       // Eventually, only when stage is dev, codeArtifactStack is created
       const codeArtifactStack = new CodeArtifactStack(scope, `${stackPrefix}-CodeArtifactStack`, {
