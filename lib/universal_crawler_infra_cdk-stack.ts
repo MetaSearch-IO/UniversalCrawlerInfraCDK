@@ -8,9 +8,11 @@ import {
   KaitoCloudFormationCreateUpdateStackAction,
   KaitoPipeline,
   PipelineDeploymentAccounts,
+  cdkCodeBuildImportedCfnOutputJson,
 } from '@meta-search/kaito-cdk-construct';
 import { DeploymentGroup, stageToDeploymentGroup } from './deployment_group';
 import { DEPLOYMENT_ENVIRONMENTS, CDK_REPO } from './constants';
+import { cfnOutputPropsGroups } from './cfn_output_props_group';
 
 export class UniversalCrawlerInfraPipeline extends cdk.Stack {
   constructor(scope: Construct, id: string, props: cdk.StackProps) {
@@ -45,6 +47,12 @@ export class UniversalCrawlerInfraPipeline extends cdk.Stack {
     const cdkBuildAction = new CdkCodebuildAction(this, {
       environmentsWithPublishAssetsPermission: DEPLOYMENT_ENVIRONMENTS,
       input: githubSourceAction.output,
+      environmentToCfnOutputProps: Object.fromEntries(
+        DEPLOYMENT_ENVIRONMENTS.map((env) => [
+          env.stage,
+          Object.values(cfnOutputPropsGroups).map((cfnOutputPropsGroup) => cfnOutputPropsGroup[env.stage]),
+        ]),
+      ),
     });
     pipeline.addStage({
       stageName: 'CDK-CodeBuild',
@@ -72,6 +80,16 @@ export class UniversalCrawlerInfraPipeline extends cdk.Stack {
       KaitoCloudFormationCreateUpdateStackAction[]
     > = Object.fromEntries(
       DEPLOYMENT_ENVIRONMENTS.map((deploymentEnvironment) => {
+        const importedResourceStackAction = new KaitoCloudFormationCreateUpdateStackAction({
+          account: deploymentEnvironment.account,
+          stackName: developmentGroups[deploymentEnvironment.stage].importedResourceStack.stackName,
+          actionName: 'ImportedResourceStackAction',
+          input: cdkBuildAction.output,
+          templateConfiguration: cdkBuildAction.output.atPath(
+            `${deploymentEnvironment.stage}_${cdkCodeBuildImportedCfnOutputJson}`,
+          ),
+        });
+
         const codeArtifactCfnAction = new KaitoCloudFormationCreateUpdateStackAction({
           account: deploymentEnvironment.account,
           stackName: developmentGroups[deploymentEnvironment.stage].codeArtifactStack!.stackName,
@@ -107,14 +125,24 @@ export class UniversalCrawlerInfraPipeline extends cdk.Stack {
           input: cdkBuildAction.output,
         });
 
+        const githubSamlS3RoleStackAction = new KaitoCloudFormationCreateUpdateStackAction({
+          account: deploymentEnvironment.account,
+          stackName: developmentGroups[deploymentEnvironment.stage].githubSamlS3RoleStack.stackName,
+          actionName: 'GithubSamlS3RoleStackAction',
+          input: cdkBuildAction.output,
+          runOrder: 2,
+        });
+
         return [
           deploymentEnvironment.stage,
           [
+            importedResourceStackAction,
             codeArtifactCfnAction,
             vpcCfnAction,
             slackChannelConfigurationCfnAction,
             githubOIDCRolesAndBucketStackAction,
             pagerdutyServiceStackAction,
+            githubSamlS3RoleStackAction,
           ],
         ];
       }),
