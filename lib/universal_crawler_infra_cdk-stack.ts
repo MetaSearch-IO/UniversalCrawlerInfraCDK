@@ -45,6 +45,7 @@ export class UniversalCrawlerInfraPipeline extends cdk.Stack {
     });
 
     const cdkBuildAction = new CdkCodebuildAction(this, {
+      installCommands: ['n 18'],
       environmentsWithPublishAssetsPermission: DEPLOYMENT_ENVIRONMENTS,
       input: githubSourceAction.output,
       environmentToCfnOutputProps: Object.fromEntries(
